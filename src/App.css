@@ -13,6 +13,32 @@
   color: white;
 }
 
+.game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-reminder {
+  font-weight: normal;
+}
+
 .story-text-area {
+  font-size: 24pt;
   resize: none;
+}
+
+.game-board > p {
+  font-size: 16pt;
+  margin: 0.5rem 0rem;
+}
+
+.game-board > input {
+  display: block;
+  font-size: 24pt;
+  padding: 0.25rem 0rem;
+}
+
+.story {
+  white-space: pre-line;
 }
