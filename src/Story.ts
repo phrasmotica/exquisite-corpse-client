@@ -60,7 +60,7 @@ export class Story {
                 return this.end.length + 1
 
             default:
-                return ""
+                return 1
         }
     }
 
