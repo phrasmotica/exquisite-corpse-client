@@ -1,4 +1,5 @@
 import { GameBoard } from "./GameBoard"
+import { SinglePlayerGameHandler } from "./SinglePlayerGameHandler"
 
 import "./App.css"
 
@@ -6,10 +7,7 @@ const App = () => (
     <div className="App">
         <header className="App-header">
             <GameBoard
-                startPartCount={1}
-                middlePartCount={1}
-                endPartCount={1}
-                partMaxLength={250} />
+                gameHandler={new SinglePlayerGameHandler(1, 1, 1, 250)} />
         </header>
     </div>
 )

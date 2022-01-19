@@ -71,8 +71,12 @@ export class Story {
         return words[words.length - 1]
     }
 
+    public isFinished() {
+        return this.phase === StoryPhase.Finished
+    }
+
     public getStory() {
-        if (this.phase !== StoryPhase.Finished) {
+        if (!this.isFinished()) {
             return ""
         }
 

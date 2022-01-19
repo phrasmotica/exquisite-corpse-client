@@ -1,33 +1,26 @@
 import { useState } from "react"
 
-import { Story, StoryPhase } from "./Story"
+import { IGameHandler } from "./IGameHandler"
 
 interface GameBoardProps {
-    partMaxLength: number
-    startPartCount: number
-    middlePartCount: number
-    endPartCount: number
+    gameHandler: IGameHandler
 }
 
 export const GameBoard = (props: GameBoardProps) => {
-    const createStory = () => new Story(
-        props.startPartCount,
-        props.middlePartCount,
-        props.endPartCount
-    )
-
     const [currentText, setCurrentText] = useState("")
-    const [story, setStory] = useState(createStory)
+    const [story, setStory] = useState(props.gameHandler.getStory())
 
     const submit = () => {
-        story.push(currentText)
+        props.gameHandler.submit(currentText)
         setCurrentText("")
     }
 
-    const reset = () => setStory(createStory)
+    const reset = () => {
+        props.gameHandler.reset()
+        setStory(props.gameHandler.getStory())
+    }
 
-    let isFinished = story.getPhase() === StoryPhase.Finished
-    if (isFinished) {
+    if (story.isFinished()) {
         return (
             <div className="game-board">
                 <h2>Exquisite Corpse</h2>
@@ -55,6 +48,8 @@ export const GameBoard = (props: GameBoardProps) => {
         return null
     }
 
+    let partMaxLength = props.gameHandler.getPartMaxLength()
+
     return (
         <div className="game-board">
             <h2>Exquisite Corpse</h2>
@@ -72,10 +67,10 @@ export const GameBoard = (props: GameBoardProps) => {
                     onChange={e => setCurrentText(e.target.value)}
                     cols={50}
                     rows={7}
-                    maxLength={props.partMaxLength} />
+                    maxLength={partMaxLength} />
             </div>
 
-            <p>{currentText.length}/{props.partMaxLength}</p>
+            <p>{currentText.length}/{partMaxLength}</p>
 
             <input
                 type="button"
