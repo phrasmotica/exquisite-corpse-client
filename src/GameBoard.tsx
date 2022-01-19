@@ -1,18 +1,30 @@
 import { useState } from "react"
+
 import { Story, StoryPhase } from "./Story"
 
-export const GameBoard = () => {
+interface GameBoardProps {
+    partMaxLength: number
+    startPartCount: number
+    middlePartCount: number
+    endPartCount: number
+}
+
+export const GameBoard = (props: GameBoardProps) => {
+    const createStory = () => new Story(
+        props.startPartCount,
+        props.middlePartCount,
+        props.endPartCount
+    )
+
     const [currentText, setCurrentText] = useState("")
-    const [story, setStory] = useState(new Story(1, 1, 1))
+    const [story, setStory] = useState(createStory)
 
     const submit = () => {
         story.push(currentText)
         setCurrentText("")
     }
 
-    const reset = () => {
-        setStory(new Story(1, 1, 1))
-    }
+    const reset = () => setStory(createStory)
 
     let isFinished = story.getPhase() === StoryPhase.Finished
     if (isFinished) {
@@ -20,7 +32,9 @@ export const GameBoard = () => {
             <div className="game-board">
                 <h2>Exquisite Corpse</h2>
 
-                <p className="story">{story.getStory()}</p>
+                <p className="story">
+                    {story.getStory()}
+                </p>
 
                 <input
                     type="button"
@@ -44,10 +58,10 @@ export const GameBoard = () => {
                 value={currentText}
                 onChange={e => setCurrentText(e.target.value)}
                 cols={50}
-                rows={5}
-                maxLength={250} />
+                    rows={7}
+                    maxLength={props.partMaxLength} />
 
-            <p>{currentText.length}/250</p>
+            <p>{currentText.length}/{props.partMaxLength}</p>
 
             <input
                 type="button"

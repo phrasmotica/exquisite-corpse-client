@@ -5,7 +5,11 @@ import "./App.css"
 const App = () => (
     <div className="App">
         <header className="App-header">
-            <GameBoard />
+            <GameBoard
+                startPartCount={1}
+                middlePartCount={1}
+                endPartCount={1}
+                partMaxLength={250} />
         </header>
     </div>
 )
