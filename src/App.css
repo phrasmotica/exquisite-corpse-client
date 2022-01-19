@@ -41,4 +41,6 @@
 
 .story {
   white-space: pre-line;
+  word-wrap: break-word;
+  width: 1000px;
 }
