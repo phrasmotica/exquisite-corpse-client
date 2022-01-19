@@ -23,9 +23,38 @@
   font-weight: normal;
 }
 
+.input-box {
+  display: flex;
+  width: 1000px;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+}
+
+.input-box .prefix {
+  max-width: 250px;
+  font-size: 20pt;
+  text-align: end;
+  color: #999;
+  padding: 2px 4px;
+  border-right: 2px dashed #999;
+  margin-right: 4px;
+}
+
+.pre-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: rtl;
+}
+
 .story-text-area {
-  font-size: 24pt;
+  flex-grow: 1;
+  font-size: 20pt;
+  font-family: inherit;
+  overflow-y: auto;
   resize: none;
+  outline: none;
+  border: none;
 }
 
 .game-board > p {

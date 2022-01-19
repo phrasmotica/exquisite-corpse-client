@@ -44,6 +44,17 @@ export const GameBoard = (props: GameBoardProps) => {
         )
     }
 
+    let lastWord = story.getLastWord()
+    let prefix = lastWord.length > 0 ? lastWord : ""
+
+    const renderPrefix = () => {
+        if (prefix.length > 0) {
+            return <span className="prefix pre-ellipsis">{prefix}&lrm;</span>
+        }
+
+        return null
+    }
+
     return (
         <div className="game-board">
             <h2>Exquisite Corpse</h2>
@@ -52,14 +63,17 @@ export const GameBoard = (props: GameBoardProps) => {
                 You are writing part <b>{story.getPart()}</b> of the <b>{story.getPhase()}</b> of the story.
             </h4>
 
-            <textarea
-                className="story-text-area"
-                required
-                value={currentText}
-                onChange={e => setCurrentText(e.target.value)}
-                cols={50}
+            <div className="input-box">
+                {renderPrefix()}
+                <textarea
+                    className="story-text-area"
+                    required
+                    value={currentText}
+                    onChange={e => setCurrentText(e.target.value)}
+                    cols={50}
                     rows={7}
                     maxLength={props.partMaxLength} />
+            </div>
 
             <p>{currentText.length}/{props.partMaxLength}</p>
 

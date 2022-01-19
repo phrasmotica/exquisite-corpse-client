@@ -64,6 +64,13 @@ export class Story {
         }
     }
 
+    public getLastWord() {
+        let parts = [...this.start, ...this.middle, ...this.end]
+        let lastPart = parts[parts.length - 1]
+        let words = lastPart?.split(" ") ?? [""]
+        return words[words.length - 1]
+    }
+
     public getStory() {
         if (this.phase !== StoryPhase.Finished) {
             return ""
